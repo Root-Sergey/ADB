@@ -1,0 +1,43 @@
+Просмотреть список подключенных приложений
+adb devices
+
+Просмотреть список приложений
+adb shell pm list packages
+pm - package manager
+
+Найти, где находится приложение
+adb shell ‘pm list packages -f | grep name_app’
+findstr (PowerShell)
+
+Удалить приложение
+adb uninstall com.android.name_app
+
+Установить приложение
+adb install путь_откуда_name_app.apk
+
+Установить приложение, если подключено несколько устройств
+1.	Найти где находится устройство 
+Вариант: откр. Android Studio
+Build – Build bundle(s) – Build APK(s) (собрать), locate (открывает где лежит билд)
+Загрузить в телеграм – открыть на девайсе - Install
+Загрузить через adb: 
+adb -s install номер_девайса name_app.apk
+
+Запись логов
+adb logcat | grep -rnw “com.android.name_app” > /Users/Name/Android/name_app.log (путь куда сохранить лог)
+adb logcat | findstr -rnw "name_app" > /path/name.log (P.SH)
+Ctrl+C (остановить запись логов)
+
+-r — включает рекурсивный поиск в текущем каталоге
+-n — выведет номера строк, содержащих поисковый запрос
+-w - ищет весь шаблон, который находится в строке
+
+Установить старую Андроид-систему, Андроид другого производителя
+adb restore /Users/Name/Android/name_app/backup/backup.ab 
+
+Создать образ из которого возможно установить (Бэк ап)
+adb backup -apk -shared -all – f  / Users…
+
+Скриншот
+adb shell screencap /storage/emulated/0/DCIM/screen_ name_app.png
+adb exec-out screencap -p > screen.png (скриншот сохраняется на ПК)
